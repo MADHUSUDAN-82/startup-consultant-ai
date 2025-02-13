@@ -147,6 +147,7 @@ def generate_roadmap():
     system = AIStartupConsultant(llm, startup_consult_type)
     try:
         response, sector = system.process_startup_request(user_input)
+        response = str(response)
         return jsonify({"result": response, "sector": sector})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
