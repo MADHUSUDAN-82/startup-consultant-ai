@@ -132,6 +132,10 @@ class AIStartupConsultant:
         self.crew = Crew(agents=list(agents.values()), tasks=list(tasks.values()))
         response = self.crew.kickoff(inputs={"query": user_query})
         return response, sector
+        
+@app.route('/', methods=['GET'])
+def hello():
+    return jsonify({"msg" : "server healthy"})
     
 @app.route('/consult', methods=['POST'])
 def generate_roadmap():
@@ -143,6 +147,7 @@ def generate_roadmap():
 
     user_input = data['query']
     startup_consult_type = data['type']
+    print(user_input, startup_consult_type)
 
     system = AIStartupConsultant(llm, startup_consult_type)
     try:
